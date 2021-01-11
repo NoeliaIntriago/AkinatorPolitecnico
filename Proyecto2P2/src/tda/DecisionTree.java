@@ -5,6 +5,10 @@
  */
 package tda;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Comparator;
 
 /**
@@ -14,6 +18,14 @@ import java.util.Comparator;
 public class DecisionTree<E> implements Comparator<E> {
     
     private Node<E> root;
+
+    @Override
+    public int compare(E o1, E o2) {
+        if(o1.equals(o2)){
+            return 1;
+        }
+        return 0;
+    }
     
     public static class Node<E>{
         private E data;
@@ -36,6 +48,11 @@ public class DecisionTree<E> implements Comparator<E> {
         }
         
         public Node(E data){
+            this.data = data;
+            this.flag = flag;
+        }
+        
+        public Node(E data, boolean flag){
             this.data = data;
             this.flag = flag;
         }
@@ -93,6 +110,28 @@ public class DecisionTree<E> implements Comparator<E> {
         return 1 + Math.max(height(n.getYes()), height(n.getNo()));
     }
     
+    public void inOrden() {
+        inOrden(root);
+    }
+
+    private void inOrden(Node<E> n) {
+        if (n != null) {
+            inOrden(n.getNo());
+            System.out.println(n.data);
+            inOrden(n.getYes());
+        }
+    }
+    
+    public String postOrden(Node<E> n){
+        if(n != null){
+            if(n.getNo() == null && n.getYes() == null){
+                return "#R " + n.getData();
+            }
+            return postOrden(n.getYes()) + "\n" + postOrden(n.getNo()) + "\n#P " + n.getData();
+        }
+        return "";
+    }
+    
     public E getRoot(){
         return root == null? null: root.getData();
     }
@@ -130,6 +169,139 @@ public class DecisionTree<E> implements Comparator<E> {
         }
         Node<E> respuestaNode = respuesta? p.getYes(): p.getNo();
         return respuestaNode == null ? null: respuestaNode.getData();
+    }
+    
+    public boolean replace(E old, E newElement){
+        if(old == null || newElement == null){
+            return false;
+        }
+        Node<E> n = searchNode(old);
+        if(n == null){
+            return false;
+        }
+        n.setData(newElement);
+        return true;
+    }
+    
+    public boolean add(E child, E parent, boolean direccion){
+        Node<E> nchild = new Node<>(child);
+        if(child == null){
+            return false;
+        }
+        if(parent == null && isEmpty()){
+            root = nchild;
+            return true;
+        }
+        if(parent != null && searchNode(child) == null){
+            Node<E> nparent = searchNode(parent);
+            if(direccion){
+                if(nparent == null || nparent.getYes() != null){
+                    return false;
+                }
+                nparent.setYes(nchild);
+            }else{
+                if(nparent == null || nparent.getNo() != null){
+                    return false;
+                }
+                nparent.setNo(nchild);
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean addAnswer(E e){
+        if(e ==  null){
+            return false;
+        }
+        return addAnswer(root, e);
+    }
+    
+    private boolean addAnswer(Node<E> n, E e){
+        Node<E> nAnswer = new Node<>(e);
+        if(e == null){
+            return false;
+        }else if(n == null){
+            Node<E> newNodo = new Node<>(e, true);
+            this.root = newNodo;
+            return true;
+        }else{
+            if(searchNode(e) == null){
+                if(n.getYes() != null && n.getNo() != null){
+                    if(n.getNo().getYes() != null && n.getYes().getYes() == null && n.isFlag() == true){
+                        return addAnswer(n.getYes(), e);
+                    }
+                    return addAnswer(n.getNo(), e);
+                }else if(n.getYes() == null){
+                    n.setYes(nAnswer);
+                    return true;
+                }else if(n.getNo() == null && n.getYes() != null){
+                    n.setFlag(true);
+                    n.setNo(nAnswer);
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+    
+    public boolean addQuestion(E e){
+        if(e ==  null){
+            return false;
+        }
+        return addQuestion(root, e);
+    }
+    
+    private boolean addQuestion(Node<E> n, E e){
+        Node<E> nQuestion = new Node<>(e);
+        if(e == null){
+            return false;
+        }else if(n == null){
+            Node<E> newNodo = new Node<>(e, true);
+            this.root = newNodo;
+            return true;
+        }else{
+            if(searchNode(e) == null){
+                if(n.getYes() != null && n.getNo() != null){
+                    if(n.getNo().getNo() != null && n.getYes().getNo() == null && n.isFlag()){
+                        return addQuestion(n.getYes(), e);
+                    }
+                    return addQuestion(n.getNo(), e);
+                }else if(n.getNo() == null){
+                    n.setNo(nQuestion);
+                    return true;
+                }else if(n.getYes() == null && n.getNo() != null && n.isFlag()){
+                    n.setYes(nQuestion);
+                    return true;
+                }
+                return true;
+            }
+            return false;
+        }
+    }
+    
+    public static DecisionTree<String> loadTree(){
+        DecisionTree<String> tree = new DecisionTree<>();
+        Node<String> node = null;
+        try(BufferedReader br = new BufferedReader(new FileReader("src/resources/datos-1.txt"))){
+            String line;
+            while((line = br.readLine()) != null){
+                String linea = line.substring(3);
+                node= new Node<>(linea);
+            }
+        }catch(Exception ex){
+            System.out.println("Exception" + ex);
+        }
+        return tree;
+    }
+    
+    public void saveTree(){
+        String tree = postOrden(root);
+        try(BufferedWriter bw =  new BufferedWriter(new FileWriter("src/resources/datos-1.txt"))){
+            bw.write(tree);
+        }catch(Exception e){
+            System.out.println("Excepción" + e);
+        }
     }
     
 }
