@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Comparator;
+import java.util.Stack;
 
 /**
  *
@@ -283,15 +284,26 @@ public class DecisionTree<E> implements Comparator<E> {
     public static DecisionTree<String> loadTree(){
         DecisionTree<String> tree = new DecisionTree<>();
         Node<String> node = null;
+        Stack<Node<String>> pila = new Stack<>();
         try(BufferedReader br = new BufferedReader(new FileReader("src/resources/datos-1.txt"))){
             String line;
             while((line = br.readLine()) != null){
                 String linea = line.substring(3);
                 node= new Node<>(linea);
+                if(line.startsWith("#P")){
+                    if(!pila.isEmpty()){
+                        node.setNo(pila.pop());
+                    }
+                    if(!pila.isEmpty()){
+                        node.setYes(pila.pop());
+                    }
+                } 
+                pila.push(node);
             }
         }catch(Exception ex){
             System.out.println("Exception" + ex);
         }
+        tree.root = node;
         return tree;
     }
     
