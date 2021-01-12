@@ -5,6 +5,7 @@
  */
 package main;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,12 +24,17 @@ public class App extends Application {
     }
     
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(App.class.getResource("src/ventanas/Juego.fxml")); 
-        Scene scene = new Scene(root);
-        stage.setTitle("BIENVENIDO");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage stage){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/Inicio.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("BIENVENIDO");
+            stage.show();
+        }catch(IOException e){
+            System.err.println("Error al mostrar la pantalla: "+e);
+        }
     }
 
 }
