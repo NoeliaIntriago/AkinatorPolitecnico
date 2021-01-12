@@ -30,7 +30,7 @@ public class App extends Application {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle("BIENVENIDO");
+            stage.setTitle("GENIA POLITÉCNICA");
             stage.show();
         }catch(IOException e){
             System.err.println("Error al mostrar la pantalla: "+e);
