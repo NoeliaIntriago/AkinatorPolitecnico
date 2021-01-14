@@ -30,7 +30,8 @@ public class InicioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-public void jugar(ActionEvent event){
+    
+    public void jugar(ActionEvent event){
         try{
             Parent root = FXMLLoader.load(getClass().getResource("/ventanas/Juego.fxml"));
             Scene scene = new Scene(root);

@@ -18,7 +18,7 @@ import java.util.Stack;
  */
 public class DecisionTree<E> implements Comparator<E> {
     
-    private Node<E> root;
+    public Node<E> root;
 
     @Override
     public int compare(E o1, E o2) {
@@ -49,6 +49,8 @@ public class DecisionTree<E> implements Comparator<E> {
         }
         
         public Node(E data){
+            this.yes=null;
+            this.no=null;
             this.data = data;
             this.flag = flag;
         }
@@ -281,35 +283,54 @@ public class DecisionTree<E> implements Comparator<E> {
         }
     }
     
-    public static DecisionTree<String> loadTree(){
+     public static DecisionTree<String> loadTree(){
         DecisionTree<String> tree = new DecisionTree<>();
-        Node<String> node = null;
-        Stack<Node<String>> pila = new Stack<>();
-        try(BufferedReader br = new BufferedReader(new FileReader("src/resources/datos-1.txt"))){
-            String line;
-            while((line = br.readLine()) != null){
-                String linea = line.substring(3);
-                node= new Node<>(linea);
-                if(line.startsWith("#P")){
-                    if(!pila.isEmpty()){
-                        node.setNo(pila.pop());
+        DecisionTree.Node<String> node = null;
+        Stack<DecisionTree.Node<String>> pila = new Stack<>();
+        try(BufferedReader br = new BufferedReader(new FileReader("src/resources/datos(1).txt"))){
+            String line;            
+            while((line = br.readLine()) != null){                                
+                String linea = line.substring(3);                                
+                node= new DecisionTree.Node<>(linea);                  
+                if(line.startsWith("#P")){                    
+                    if(!pila.isEmpty()&&pila.peek().yes==null){
+                        tree.addQuestion(linea); 
+                        pila.peek().setYes(node);                        
+                    }if(!pila.isEmpty()&&pila.peek().no==null){                        
+                        tree.addQuestion(linea);
+                        pila.peek().setNo(node);
+                        if(!pila.peek().equals(tree.root)){
+                            pila.pop();
+                        }
+                    }else{
+                        tree.root = node;                        
                     }
-                    if(!pila.isEmpty()){
-                        node.setYes(pila.pop());
+                    pila.push(node);
+                }else{                    
+                    if(pila.peek().yes==null){
+                        tree.addAnswer(pila.peek(), linea);
+                        pila.peek().yes=node;                                                
+                    }else{
+                        tree.addAnswer(pila.peek(), linea);
+                        pila.peek().no=node;                         
+                        if(!pila.peek().equals(tree.root)){
+                            pila.pop();
+                        }
                     }
-                } 
-                pila.push(node);
+                }                               
             }
         }catch(Exception ex){
             System.out.println("Exception" + ex);
-        }
-        tree.root = node;
+        }  
+        System.out.println(tree.getRoot()+" RAIZ"); 
+        System.out.println(tree.root.yes.data+" SI");
+        System.out.println(tree.root.no.data+" NO");
         return tree;
     }
     
     public void saveTree(){
         String tree = postOrden(root);
-        try(BufferedWriter bw =  new BufferedWriter(new FileWriter("src/resources/datos-1.txt"))){
+        try(BufferedWriter bw =  new BufferedWriter(new FileWriter("src/resources/datos(1).txt"))){
             bw.write(tree);
         }catch(Exception e){
             System.out.println("Excepción" + e);
