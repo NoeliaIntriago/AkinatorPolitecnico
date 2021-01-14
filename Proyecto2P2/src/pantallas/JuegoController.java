@@ -53,7 +53,7 @@ public class JuegoController implements Initializable {
     }
     
     public DecisionTree<String> positivo(DecisionTree<String> a){            
-        //System.out.println(a.getRoot());
+        
         pregunta.setVisible(false);        
         //if(a.root.getYes()==null) return null;                
         //a.root = a.root.getYes();

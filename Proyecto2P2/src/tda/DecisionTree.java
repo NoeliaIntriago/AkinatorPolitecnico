@@ -291,40 +291,33 @@ public class DecisionTree<E> implements Comparator<E> {
             String line;            
             while((line = br.readLine()) != null){                                
                 String linea = line.substring(3);                                
-                node= new DecisionTree.Node<>(linea);                  
-                if(line.startsWith("#P")){                    
-                    if(!pila.isEmpty()&&pila.peek().yes==null){
-                        tree.addQuestion(linea); 
-                        pila.peek().setYes(node);                        
-                    }if(!pila.isEmpty()&&pila.peek().no==null){                        
-                        tree.addQuestion(linea);
-                        pila.peek().setNo(node);
-                        if(!pila.peek().equals(tree.root)){
-                            pila.pop();
-                        }
+                node= new DecisionTree.Node<>(linea);
+                if(line.startsWith("#P")){ 
+                    if(pila.isEmpty()){                        
+                        tree.root = node;
                     }else{
-                        tree.root = node;                        
-                    }
+                        if(pila.peek().yes==null){
+                            pila.peek().yes=node;                             
+                        }else if(pila.peek().no==null){
+                            pila.peek().no=node;                                                      
+                        }}
                     pila.push(node);
-                }else{                    
+                }else{ 
                     if(pila.peek().yes==null){
-                        tree.addAnswer(pila.peek(), linea);
-                        pila.peek().yes=node;                                                
-                    }else{
-                        tree.addAnswer(pila.peek(), linea);
-                        pila.peek().no=node;                         
-                        if(!pila.peek().equals(tree.root)){
-                            pila.pop();
-                        }
+                        pila.peek().yes=node;
+                    }else if(pila.peek().no==null){
+                        pila.peek().no=node;
+                        if(pila.size()!=1){
+                                pila.pop();                            
+                            } 
+                        pila.pop();
                     }
-                }                               
+                }                 
             }
+            
         }catch(Exception ex){
             System.out.println("Exception" + ex);
-        }  
-        System.out.println(tree.getRoot()+" RAIZ"); 
-        System.out.println(tree.root.yes.data+" SI");
-        System.out.println(tree.root.no.data+" NO");
+        }
         return tree;
     }
     
@@ -335,6 +328,10 @@ public class DecisionTree<E> implements Comparator<E> {
         }catch(Exception e){
             System.out.println("Excepción" + e);
         }
+    }
+    
+    public static void main(String[] args){
+        loadTree();
     }
     
 }
