@@ -5,18 +5,18 @@
  */
 package pantallas;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Stack;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import tda.DecisionTree;
-import tda.DecisionTree.Node;
 import static tda.DecisionTree.loadTree;
 
 /**
@@ -28,63 +28,50 @@ public class JuegoController implements Initializable {
     
     DecisionTree<String> arbol = loadTree();
     @FXML
-    private Text pregunta;    
-    private Button si;
-    private Button no;
+    private Text pregunta; 
+    
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {        
-        si = new Button();
-        si.setText("Sí");
-        no = new Button();        
-        no.setText("no");
+    public void initialize(URL url, ResourceBundle rb) {
         mostrarPreguntas();
-        
     }    
     
     public void mostrarPreguntas(){
         pregunta.setText(arbol.getRoot());
         pregunta.setVisible(true);
     }
-    
-    
-    public void positivo(){
-        positivo(arbol);        
+
+    public void positivo(){ 
+        DecisionTree.Node<String> nodo = positivo(arbol);
+        pregunta.setText(nodo.getData());              
     }
     
-    public DecisionTree<String> positivo(DecisionTree<String> a){            
-        
-        pregunta.setVisible(false);        
-        //if(a.root.getYes()==null) return null;                
-        //a.root = a.root.getYes();
-        //System.out.println(a.root.getYes());        
-        //System.out.println("NUEVA RAIZ"+a.getRoot());
-        return a;
+    public DecisionTree.Node<String> positivo(DecisionTree<String> a){ 
+        DecisionTree.Node<String> nodo = a.root;
+        if(nodo.getYes()!=null){a.root=nodo.getYes();}        
+        return a.root;
     }
     
-    public void negativo(){
-        negativo(arbol);
+    public void negativo(){   
+        pregunta.setText(negativo(arbol));         
+    } 
+    
+    public String negativo(DecisionTree<String> a){
+        DecisionTree.Node<String> nodo = a.root;
+        if(nodo.getNo()!=null){a.root = nodo.getNo();}
+        return a.getRoot();
     }
     
-    public DecisionTree<String> negativo(DecisionTree<String> a){                        
-        pregunta.setVisible(false);
-        if(a.root.getYes()==null) return null;        
-        a.root = a.root.getNo();        
-        return a;
-    }
-    
-    public void handle(ActionEvent event){
-        if((event.getSource()==si)){
-            positivo();  
-            mostrarPreguntas();
-        }else if((event.getSource()==no)){
-            negativo();  
-            mostrarPreguntas();
-        
-    }}
-    /*
-    public static void main(String[] args){                
-        System.out.println("RAIZ DEL ARBOL -- "+loadTree().getRoot());        
-    }
-*/
+    public void adivinar(ActionEvent event){
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/ventanas/Fin.fxml"));
+            Scene scene = new Scene(root);
+            Stage appStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            appStage.setScene(scene);
+            appStage.toFront();
+            appStage.show();
+        }catch(IOException e){
+            System.err.println(e);
+        }
+    } 
 }

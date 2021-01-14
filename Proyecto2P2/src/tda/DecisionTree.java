@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tda;
 
 import java.io.BufferedReader;
@@ -314,9 +309,8 @@ public class DecisionTree<E> implements Comparator<E> {
                     }
                 }                 
             }
-            
         }catch(Exception ex){
-            System.out.println("Exception" + ex);
+            System.out.println("Exception " + ex);
         }
         return tree;
     }
@@ -329,9 +323,5 @@ public class DecisionTree<E> implements Comparator<E> {
             System.out.println("Excepción" + e);
         }
     }
-    
-    public static void main(String[] args){
-        loadTree();
-    }
-    
+
 }

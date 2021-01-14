@@ -32,6 +32,8 @@
                </font>
             </Text>
          </children>
-      </Pane>         
+      </Pane>
+      <Button fx:id="si2" layoutX="752.0" layoutY="278.0" mnemonicParsing="false" text="Sí" />
+      <Button fx:id="no2" layoutX="786.0" layoutY="279.0" mnemonicParsing="false" text="No" />         
    </children>
 </AnchorPane>
