@@ -14,26 +14,32 @@
          <image>
             <Image url="@../resources/imagenes/Inicio.png" />
          </image></ImageView>
-      <Button fx:id="si" layoutX="741.0" layoutY="335.0" mnemonicParsing="false" onAction="#positivo" prefHeight="22.0" prefWidth="283.0" text="Sí">
-         <font>
-            <Font name="Andalus" size="24.0" />
-         </font>
-      </Button>
-      <Button fx:id="no" layoutX="741.0" layoutY="405.0" mnemonicParsing="false" onAction="#negativo" prefHeight="22.0" prefWidth="283.0" text="No">
-         <font>
-            <Font name="Andalus" size="24.0" />
-         </font>
-      </Button>
-      <Pane layoutX="725.0" layoutY="71.0" prefHeight="119.0" prefWidth="254.0">
+      <Pane layoutX="725.0" layoutY="71.0" prefHeight="138.0" prefWidth="262.0">
          <children>
-            <Text fx:id="pregunta" fill="#7c00ff" layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pregunta">
+            <Text fx:id="pregunta" fill="#7c00ff" layoutX="10.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pregunta" wrappingWidth="242.80841064453125">
                <font>
                   <Font name="Andalus" size="26.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Button fx:id="si2" layoutX="752.0" layoutY="278.0" mnemonicParsing="false" text="Sí" />
-      <Button fx:id="no2" layoutX="786.0" layoutY="279.0" mnemonicParsing="false" text="No" />         
+      <Button fx:id="si" layoutX="744.0" layoutY="324.0" mnemonicParsing="false" onAction="#positivo" prefHeight="40.0" prefWidth="302.0" text="Sí">
+         <font>
+            <Font name="Bodoni MT" size="27.0" />
+         </font></Button>
+      <Button fx:id="no" layoutX="744.0" layoutY="414.0" mnemonicParsing="false" onAction="#negativo" prefHeight="52.0" prefWidth="302.0" text="No">
+         <font>
+            <Font name="Bodoni MT" size="27.0" />
+         </font></Button>
+      <Button fx:id="si2" layoutX="744.0" layoutY="492.0" mnemonicParsing="false" onAction="#adivino" prefHeight="40.0" prefWidth="302.0" text="Sí">
+         <font>
+            <Font name="Bodoni MT" size="27.0" />
+         </font>
+      </Button>
+      <Button fx:id="no2" layoutX="744.0" layoutY="582.0" mnemonicParsing="false" onAction="#noAdivino" prefHeight="52.0" prefWidth="302.0" text="No">
+         <font>
+            <Font name="Bodoni MT" size="27.0" />
+         </font>
+      </Button>         
    </children>
 </AnchorPane>
