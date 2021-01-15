@@ -18,6 +18,8 @@ import javafx.stage.Stage;
  * @author DELL
  */
 public class App extends Application { 
+    
+    private static Scene scene;
 
     public static void main(String[] args) {
         launch(args);       
@@ -36,5 +38,4 @@ public class App extends Application {
             System.err.println("Error al mostrar la pantalla: "+e);
         }
     }
-
 }

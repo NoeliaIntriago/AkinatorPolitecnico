@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,29 +16,35 @@
             <Image url="@../resources/imagenes/no%20adivine.png" />
          </image>
       </ImageView>
-      <Pane layoutX="319.0" layoutY="81.0" prefHeight="130.0" prefWidth="335.0">
+      <Pane layoutX="294.0" layoutY="82.0" prefHeight="130.0" prefWidth="335.0">
          <children>
-            <Text fill="#72059a" layoutX="22.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lo sabía desde que te vi. " wrappingWidth="308.33868408203125">
+            <Text fill="#5b0b94" layoutX="22.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lo sabía desde que te vi. " wrappingWidth="308.33868408203125">
                <font>
-                  <Font name="Bell MT" size="27.0" />
+                  <Font name="Comic Sans MS" size="25.0" />
                </font>
             </Text>
-            <Text fill="#72059a" layoutX="22.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Deseas jugar de nuevo?" wrappingWidth="290.7386474609375">
+            <Text fill="#5b0b94" layoutX="22.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Deseas jugar de nuevo?" wrappingWidth="290.7386474609375">
                <font>
-                  <Font name="Bell MT" size="27.0" />
+                  <Font name="Comic Sans MS" size="25.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Button layoutX="323.0" layoutY="335.0" mnemonicParsing="false" onAction="#jugar" prefHeight="48.0" prefWidth="326.0" text="Sí">
+      <Button layoutX="323.0" layoutY="335.0" mnemonicParsing="false" onAction="#jugar" prefHeight="48.0" prefWidth="326.0" text="Sí" textFill="#ff92e4" underline="true">
          <font>
-            <Font name="Batang" size="28.0" />
+            <Font name="Franklin Gothic Demi Cond" size="29.0" />
          </font>
+         <effect>
+            <ColorAdjust brightness="-0.19" contrast="1.0" hue="0.04" saturation="0.36" />
+         </effect>
       </Button>
-      <Button layoutX="323.0" layoutY="399.0" mnemonicParsing="false" onAction="#salir" prefHeight="48.0" prefWidth="326.0" text="No">
+      <Button layoutX="323.0" layoutY="399.0" mnemonicParsing="false" onAction="#salir" prefHeight="48.0" prefWidth="326.0" text="No" textFill="#ff92e4" underline="true">
          <font>
-            <Font name="Batang" size="28.0" />
+            <Font name="Franklin Gothic Demi Cond" size="29.0" />
          </font>
+         <effect>
+            <ColorAdjust brightness="-0.19" contrast="1.0" hue="0.04" saturation="0.36" />
+         </effect>
       </Button>
    </children>
 </AnchorPane>

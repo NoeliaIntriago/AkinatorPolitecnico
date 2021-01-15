@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import main.App;
 import tda.DecisionTree;
 import static tda.DecisionTree.loadTree;
 
@@ -46,15 +47,27 @@ public class JuegoController implements Initializable {
         pregunta.setVisible(true);        
     }
 
-    public void positivo(){         
+    public void positivo(ActionEvent event) throws IOException{         
         DecisionTree.Node<String> nodo = positivo(arbol);
-        ultimo = nodo;        
-        if(nodo.getYes()==null || nodo.getYes()==null){
+        ultimo = nodo;    
+        String texto =  pregunta.getText().toString();
+        if(texto.contains("¡")){
+            try{
+                Parent root = FXMLLoader.load(getClass().getResource("/ventanas/Adivino.fxml"));
+                Scene scene = new Scene(root);
+                Stage appStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                appStage.setScene(scene);
+                appStage.toFront();
+                appStage.show();
+            }catch(IOException e){
+                System.err.println(e);
+            }
+        }
+        if(nodo.getYes()==null || nodo.getNo()==null){
             pregunta.setText("¡Creo que piensas en "+ nodo.getData()+"!"+" ¿Adiviné?");            
         }else{
             pregunta.setText(nodo.getData());
-        }
-        
+        }       
     }
     
     public DecisionTree.Node<String> positivo(DecisionTree<String> a){ 
@@ -63,10 +76,23 @@ public class JuegoController implements Initializable {
         return a.root;
     }
     
-    public void negativo(){
+    public void negativo(ActionEvent event){
         DecisionTree.Node<String> nodo = negativo(arbol);
         ultimo = nodo;
-        if(nodo.getYes()==null || nodo.getYes()==null){
+        String texto =  pregunta.getText().toString();
+        if(texto.contains("¡")){
+            try{
+                Parent root = FXMLLoader.load(getClass().getResource("/ventanas/No_Adivino.fxml"));
+                Scene scene = new Scene(root);
+                Stage appStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                appStage.setScene(scene);
+                appStage.toFront();
+                appStage.show();
+            }catch(IOException e){
+                System.err.println(e);
+            }
+        }
+        if(nodo.getYes()==null || nodo.getNo()==null){
             pregunta.setText("¡Creo que piensas en "+ nodo.getData()+"!"+" ¿Adiviné?");            
         }else{
             pregunta.setText(nodo.getData());
