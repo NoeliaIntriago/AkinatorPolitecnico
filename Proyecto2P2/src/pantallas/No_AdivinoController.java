@@ -32,10 +32,15 @@ public class No_AdivinoController implements Initializable {
     //private JuegoController juego;    
     @FXML        
     private Text descripcion;
+    @FXML
     private Text advertencia;
+    @FXML
     private TextField respuesta;
+    @FXML
     private TextField pregunta;
+    @FXML
     private Button guardar1;
+    @FXML
     private Button guardar2;
             
     /**
@@ -45,8 +50,7 @@ public class No_AdivinoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //DecisionTree.Node<String> ultimo = juego.ultimo;
         //System.out.println(ultimo.getData());
-        advertencia.setText("");
-        descripcion.setText(" ");              
+        guardarRespuesta();
     } 
     
     public void guardarRespuesta(){        
@@ -56,6 +60,6 @@ public class No_AdivinoController implements Initializable {
     }
     
     public void guardarPregunta(){
-        String descripcion = pregunta.getText();
+        //String descripcion = pregunta.getText();
     }
 }
