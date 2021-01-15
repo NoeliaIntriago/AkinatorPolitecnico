@@ -15,44 +15,47 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import pantallas.JuegoController;
+import tda.DecisionTree;
 
 /**
  * FXML Controller class
  *
  * @author pc-4k
  */
-public class No_AdivinoController implements Initializable {    
-    @FXML    
-    private Text salir;
+public class No_AdivinoController implements Initializable { 
+    
+    //private JuegoController juego;    
+    @FXML        
+    private Text descripcion;
+    private Text advertencia;
+    private TextField respuesta;
+    private TextField pregunta;
+    private Button guardar1;
+    private Button guardar2;
+            
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        salir.setVisible(false);        
-    }    
+        //DecisionTree.Node<String> ultimo = juego.ultimo;
+        //System.out.println(ultimo.getData());
+        advertencia.setText("");
+        descripcion.setText(" ");              
+    } 
+    
+    public void guardarRespuesta(){        
+        //String animal = respuesta.getText();
+        descripcion.setText("¿Cuál es la diferencia entre un ");
+        advertencia.setText("Por favor llena todos los espacios");
+    }
     
     public void guardarPregunta(){
-        
+        String descripcion = pregunta.getText();
     }
-    
-    public void guardarRespuesta(){
-        salir.setVisible(true);
-    }
-    
-    public void salir(ActionEvent event){
-        try{
-            Parent root = FXMLLoader.load(getClass().getResource("/ventanas/Juego.fxml"));
-            Scene scene = new Scene(root);
-            Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.show();
-        }catch(IOException e){
-            System.err.println(e);
-        }
-    }  
-    
 }

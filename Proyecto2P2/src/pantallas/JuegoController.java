@@ -28,6 +28,7 @@ import static tda.DecisionTree.loadTree;
 public class JuegoController implements Initializable {
     
     DecisionTree<String> arbol = loadTree();
+    DecisionTree.Node<String> ultimo;
     @FXML
     private Text pregunta;     
     private Button si;
@@ -37,20 +38,17 @@ public class JuegoController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Button si = new Button();
-        Button no = new Button();
-        Button si2 = new Button();
-        Button no2 = new Button();
         mostrarPreguntas();                 
-    }   
-    
+    }      
+      
     public void mostrarPreguntas(){
         pregunta.setText(arbol.getRoot());
         pregunta.setVisible(true);        
     }
 
     public void positivo(){         
-        DecisionTree.Node<String> nodo = positivo(arbol);        
+        DecisionTree.Node<String> nodo = positivo(arbol);
+        ultimo = nodo;        
         if(nodo.getYes()==null || nodo.getYes()==null){
             pregunta.setText("¡Creo que piensas en "+ nodo.getData()+"!"+" ¿Adiviné?");            
         }else{
@@ -67,6 +65,7 @@ public class JuegoController implements Initializable {
     
     public void negativo(){
         DecisionTree.Node<String> nodo = negativo(arbol);
+        ultimo = nodo;
         if(nodo.getYes()==null || nodo.getYes()==null){
             pregunta.setText("¡Creo que piensas en "+ nodo.getData()+"!"+" ¿Adiviné?");            
         }else{
@@ -105,4 +104,5 @@ public class JuegoController implements Initializable {
             System.err.println(e);
         }
     } 
+
 }
