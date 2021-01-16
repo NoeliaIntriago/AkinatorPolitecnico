@@ -28,14 +28,23 @@ import static tda.DecisionTree.loadTree;
  */
 public class JuegoController implements Initializable {
     
-    DecisionTree<String> arbol = loadTree();
-    DecisionTree.Node<String> ultimo;
+    private final DecisionTree<String> arbol = loadTree();
+    private DecisionTree.Node<String> ultimo;
+    
     @FXML
     private Text pregunta;     
     private Button si;
     private Button no;
     private Button si2;
     private Button no2;
+    
+    public DecisionTree.Node<String> getUltimo() {
+        return ultimo;
+    }
+
+    public void setUltimo(DecisionTree.Node<String> ultimo) {
+        this.ultimo = ultimo;
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -49,7 +58,7 @@ public class JuegoController implements Initializable {
 
     public void positivo(ActionEvent event) throws IOException{         
         DecisionTree.Node<String> nodo = positivo(arbol);
-        ultimo = nodo;    
+        this.setUltimo(nodo);
         String texto =  pregunta.getText().toString();
         if(texto.contains("¡")){
             try{
@@ -78,7 +87,7 @@ public class JuegoController implements Initializable {
     
     public void negativo(ActionEvent event){
         DecisionTree.Node<String> nodo = negativo(arbol);
-        ultimo = nodo;
+        this.setUltimo(nodo);
         String texto =  pregunta.getText().toString();
         if(texto.contains("¡")){
             try{

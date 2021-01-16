@@ -120,12 +120,11 @@ public class DecisionTree<E> implements Comparator<E> {
         }
     }
     
-    public String postOrden(Node<E> n){
+    public String postOrden(Node<E> n){        
         if(n != null){
-            if(n.getNo() == null && n.getYes() == null){
-                return "#R " + n.getData();
-            }
-            return postOrden(n.getYes()) + "\n" + postOrden(n.getNo()) + "\n#P " + n.getData();
+            if(n.getNo()!= null && n.getYes()!=null){                
+                return "#P " + n.getData() +"\n"+postOrden(n.getYes())+ "\n" + postOrden(n.getNo());                
+            }return "#R " + n.getData();                           
         }
         return "";
     }
@@ -288,14 +287,15 @@ public class DecisionTree<E> implements Comparator<E> {
                 String linea = line.substring(3);                                
                 node= new DecisionTree.Node<>(linea);
                 if(line.startsWith("#P")){ 
-                    if(pila.isEmpty()){                        
+                    if(pila.isEmpty()){
                         tree.root = node;
                     }else{
                         if(pila.peek().yes==null){
                             pila.peek().yes=node;                             
                         }else if(pila.peek().no==null){
                             pila.peek().no=node;                                                      
-                        }}
+                        }
+                    }
                     pila.push(node);
                 }else{ 
                     if(pila.peek().yes==null){
@@ -304,10 +304,9 @@ public class DecisionTree<E> implements Comparator<E> {
                         pila.peek().no=node;
                         if(pila.size()!=1){
                                 pila.pop();                            
-                            } 
-                        pila.pop();
+                            }pila.pop();
                     }
-                }                 
+                }
             }
         }catch(Exception ex){
             System.out.println("Exception " + ex);
@@ -316,7 +315,7 @@ public class DecisionTree<E> implements Comparator<E> {
     }
     
     public void saveTree(){
-        String tree = postOrden(root);
+        String tree = postOrden(root);        
         try(BufferedWriter bw =  new BufferedWriter(new FileWriter("src/resources/datos(1).txt"))){
             bw.write(tree);
         }catch(Exception e){

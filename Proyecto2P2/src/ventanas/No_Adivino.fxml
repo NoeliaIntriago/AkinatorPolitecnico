@@ -26,38 +26,21 @@
             </Text>
          </children>
       </Pane>
-      <TextField fx:id="respuesta" layoutX="96.0" layoutY="311.0" prefHeight="54.0" prefWidth="458.0">
+      <TextField fx:id="respuesta" layoutX="37.0" layoutY="301.0" onMouseEntered="#borrarAdvertencia" prefHeight="38.0" prefWidth="267.0">
          <font>
             <Font name="Franklin Gothic Demi Cond" size="20.0" />
          </font></TextField>
-      <Button fx:id="guardar1" layoutX="277.0" layoutY="374.0" mnemonicParsing="false" onAction="#guardarRespuesta" prefHeight="18.0" prefWidth="114.0" text="Guardar" textFill="#ff92e4" underline="true">
+      <Button fx:id="guardar1" layoutX="113.0" layoutY="349.0" mnemonicParsing="false" onAction="#guardarRespuesta" prefHeight="32.0" prefWidth="114.0" text="Guardar" textFill="#ff92e4" underline="true">
          <font>
-            <Font name="Franklin Gothic Demi Cond" size="25.0" />
+            <Font name="Franklin Gothic Demi Cond" size="20.0" />
          </font>
          <effect>
             <ColorAdjust brightness="-0.19" contrast="1.0" hue="0.04" saturation="0.36" />
          </effect>
       </Button>
-      <TextField fx:id="pregunta" layoutX="95.0" layoutY="482.0" prefHeight="54.0" prefWidth="458.0">
+      <Text fill="WHITE" layoutX="37.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿En qué animal estabas pensando?">
          <font>
-            <Font name="Franklin Gothic Demi Cond" size="20.0" />
-         </font></TextField>
-      <Button fx:id="guardar2" layoutX="277.0" layoutY="546.0" mnemonicParsing="false" onAction="#guardarPregunta" prefHeight="44.0" prefWidth="114.0" text="Guardar" textFill="#ff92e4" underline="true">
-         <font>
-            <Font name="Franklin Gothic Demi Cond" size="25.0" />
-         </font>
-         <effect>
-            <ColorAdjust brightness="-0.19" contrast="1.0" hue="0.04" saturation="0.36" />
-         </effect>
-      </Button>
-      <Text fill="WHITE" layoutX="96.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿En qué animal estabas pensando?">
-         <font>
-            <Font name="Comic Sans MS" size="23.0" />
-         </font>
-      </Text>
-      <Text fx:id="descripcion" fill="WHITE" layoutX="96.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="texto">
-         <font>
-            <Font name="Comic Sans MS" size="23.0" />
+            <Font name="Comic Sans MS" size="17.0" />
          </font>
       </Text>
       <Text fx:id="advertencia" fill="RED" layoutX="81.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Por favor primero llena los campos requeridos" wrappingWidth="148.4296875">
@@ -65,5 +48,74 @@
             <Font name="DeftoneStylus-Regular" size="25.0" />
          </font>
       </Text>
+      <Pane fx:id="guardado" layoutX="28.0" layoutY="600.0" prefHeight="98.0" prefWidth="673.0">
+         <children>
+            <Text fill="#ff00f6" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambios guardados. ¿Deseas continuar jugando?">
+               <font>
+                  <Font size="31.0" />
+               </font>
+            </Text>
+            <Button fx:id="si" layoutX="201.0" layoutY="47.0" mnemonicParsing="false" onAction="#jugar" prefHeight="41.0" prefWidth="114.0" text="Sí" textFill="#ff92e4" underline="true">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="25.0" />
+               </font>
+               <effect>
+                  <ColorAdjust brightness="-0.19" contrast="1.0" hue="0.04" saturation="0.36" />
+               </effect>
+            </Button>
+            <Button fx:id="no" layoutX="337.0" layoutY="47.0" mnemonicParsing="false" onAction="#salir" prefHeight="41.0" prefWidth="114.0" text="No" textFill="#ff92e4" underline="true">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="25.0" />
+               </font>
+               <effect>
+                  <ColorAdjust brightness="-0.19" contrast="1.0" hue="0.04" saturation="0.36" />
+               </effect>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="campo_booleano" layoutX="416.0" layoutY="288.0" prefHeight="235.0" prefWidth="370.0">
+         <children>
+            <Text fx:id="descripcion2" fill="WHITE" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="texto" wrappingWidth="243.148193359375">
+               <font>
+                  <Font name="Comic Sans MS" size="17.0" />
+               </font>
+            </Text>
+            <TextField fx:id="pregunta1" layoutX="98.0" layoutY="121.0" onMouseEntered="#borrarAdvertencia" prefHeight="38.0" prefWidth="186.0">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="20.0" />
+               </font>
+            </TextField>
+            <Button fx:id="guardar3" layoutX="142.0" layoutY="183.0" mnemonicParsing="false" onAction="#guardarBoolean" prefHeight="38.0" prefWidth="98.0" text="Guardar" textFill="#ff92e4" underline="true">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="20.0" />
+               </font>
+               <effect>
+                  <ColorAdjust brightness="-0.19" contrast="1.0" hue="0.04" saturation="0.36" />
+               </effect>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="campo_respuesta" layoutX="37.0" layoutY="421.0" prefHeight="174.0" prefWidth="370.0">
+         <children>
+            <TextField fx:id="pregunta" layoutX="6.0" layoutY="77.0" onMouseEntered="#borrarAdvertencia" prefHeight="38.0" prefWidth="267.0">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="20.0" />
+               </font>
+            </TextField>
+            <Button fx:id="guardar2" layoutX="83.0" layoutY="122.0" mnemonicParsing="false" onAction="#guardarPregunta" prefHeight="32.0" prefWidth="114.0" text="Guardar" textFill="#ff92e4" underline="true">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="20.0" />
+               </font>
+               <effect>
+                  <ColorAdjust brightness="-0.19" contrast="1.0" hue="0.04" saturation="0.36" />
+               </effect>
+            </Button>
+            <Text fx:id="descripcion" fill="WHITE" layoutX="6.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="texto">
+               <font>
+                  <Font name="Comic Sans MS" size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
