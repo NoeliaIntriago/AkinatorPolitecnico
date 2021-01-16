@@ -293,7 +293,10 @@ public class DecisionTree<E> implements Comparator<E> {
                         if(pila.peek().yes==null){
                             pila.peek().yes=node;                             
                         }else if(pila.peek().no==null){
-                            pila.peek().no=node;                                                      
+                            pila.peek().no=node;
+                            if(pila.size()!=1){
+                                pila.pop();                            
+                            }
                         }
                     }
                     pila.push(node);
@@ -304,7 +307,7 @@ public class DecisionTree<E> implements Comparator<E> {
                         pila.peek().no=node;
                         if(pila.size()!=1){
                                 pila.pop();                            
-                            }pila.pop();
+                            }                        
                     }
                 }
             }
