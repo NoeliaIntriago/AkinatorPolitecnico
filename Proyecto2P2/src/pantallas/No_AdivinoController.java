@@ -37,7 +37,6 @@ public class No_AdivinoController implements Initializable {
     private String desc; 
     private String b;
     private JuegoController juegoController; 
-    //private final DecisionTree.Node<String> ultimo = juegoController.getUltimo(); //obtener el ultimo nodo
     private final DecisionTree<String> arbol = DecisionTree.loadTree();
     @FXML        
     private Text descripcion;
@@ -66,15 +65,10 @@ public class No_AdivinoController implements Initializable {
     
     /**
      * Initializes the controller class.
-     * @param juegoController
      * @param url
      * @param rb
      */
-    
-    public void setJC(JuegoController juegoController){
-        this.juegoController = juegoController;
-    }
-    
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         campo_booleano.setVisible(false);
@@ -84,7 +78,7 @@ public class No_AdivinoController implements Initializable {
     } 
     
     public void guardarRespuesta(){      //validar si no ingresa signos o números  
-        animal = respuesta.getText();
+        animal = respuesta.getText();        
         String ultimo = "un perro.";
         if(animal.isEmpty()){
             advertencia.setText("Por favor, llena todos los campos!!");            
@@ -95,8 +89,7 @@ public class No_AdivinoController implements Initializable {
         }else if(!animal.startsWith("u")){
             animal = "un "+animal;
         }
-        campo_respuesta.setVisible(true);   
-        // obtener el String del ultimo nodo del anterior. EJ: perro
+        campo_respuesta.setVisible(true);           
         descripcion.setText("¿Cual es la diferencia entre "+animal+" y "+ultimo+"?");
         }                
     }

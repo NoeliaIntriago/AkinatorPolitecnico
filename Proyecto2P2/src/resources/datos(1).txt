@@ -1,12 +1,12 @@
 #P ¿Es un mamifero?
 #P ¿Es un animal doméstico?
-#P ¿Come zanahorias?
-#R un conejo.
 #R un perro.
 #P ¿Es un animal de granja?
 #R una oveja.
 #R un elefante.
 #P ¿Es un ave?
+#P ¿Come néctar?
+#R un colibrí.
 #R un pinguino.
 #P ¿Vive en el oceano?
 #R un calamar.
