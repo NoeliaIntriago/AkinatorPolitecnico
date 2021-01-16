@@ -1,7 +1,7 @@
 #P ¿Es un mamifero?
 #P ¿Es un animal doméstico?
-#P come zanahorias?
-#R un conejo
+#P ¿Come zanahorias?
+#R un conejo.
 #R un perro.
 #P ¿Es un animal de granja?
 #R una oveja.
