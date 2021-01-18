@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tda.DecisionTree;
@@ -28,7 +29,8 @@ import static tda.DecisionTree.loadTree;
 public class JuegoController implements Initializable {
     
     private final DecisionTree<String> arbol = loadTree();
-    private String ultimo;
+    public No_AdivinoController naController;
+    private String ultimo;    
     
     @FXML
     private Text pregunta;     
@@ -36,20 +38,24 @@ public class JuegoController implements Initializable {
     private Button no;
     private Button si2;
     private Button no2;
-    
+        
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        mostrarPreguntas();                 
+    } 
+
     public String getUltimo() {
         return ultimo;
-    }
+    }   
 
     public void setUltimo(String ultimo) {
         this.ultimo = ultimo;
     }
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        mostrarPreguntas();                 
-    }      
-      
+    public JuegoController(){
+        this.ultimo = getUltimo();
+    }
+    
     public void mostrarPreguntas(){
         pregunta.setText(arbol.getRoot());
         pregunta.setVisible(true);        
@@ -59,11 +65,11 @@ public class JuegoController implements Initializable {
         DecisionTree.Node<String> nodo = positivo(arbol);        
         String texto =  pregunta.getText().toString();        
         if(texto.contains("¡")){
-            try{
-                Parent root = FXMLLoader.load(getClass().getResource("/ventanas/Adivino.fxml"));
-                Scene scene = new Scene(root);
-                Stage appStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                appStage.setScene(scene);
+            try{                
+                Parent root = FXMLLoader.load(getClass().getResource("/ventanas/Adivino.fxml"));                    
+                Scene scene = new Scene(root);                
+                Stage appStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();                
+                appStage.setScene(scene);                
                 appStage.toFront();
                 appStage.show();
             }catch(IOException e){
@@ -71,9 +77,8 @@ public class JuegoController implements Initializable {
             }
         }
         if(nodo.getYes()==null || nodo.getNo()==null){
-            String a = nodo.getData();                        
-            String b = a.substring(0, a.length()-1);
-            setUltimo(b);                   
+            String a = nodo.getData();                                    
+            setUltimo(a);
             pregunta.setText("¡Creo que piensas en "+ nodo.getData()+"!"+" ¿Adiviné?");             
         }else{
             pregunta.setText(nodo.getData());
@@ -103,8 +108,7 @@ public class JuegoController implements Initializable {
         }
         if(nodo.getYes()==null || nodo.getNo()==null){
             String a = nodo.getData();                        
-            String b = a.substring(0, a.length()-1);
-            setUltimo(b);            
+            setUltimo(a);  
             pregunta.setText("¡Creo que piensas en "+ nodo.getData()+"!"+" ¿Adiviné?");               
         }else{
             pregunta.setText(nodo.getData());
@@ -142,5 +146,4 @@ public class JuegoController implements Initializable {
             System.err.println(e);
         }
     } 
-
 }

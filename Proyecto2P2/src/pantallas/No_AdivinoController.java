@@ -31,12 +31,13 @@ import static tda.DecisionTree.loadTree;
  *
  * @author pc-4k
  */
-public class No_AdivinoController implements Initializable { 
+public class No_AdivinoController implements Initializable {     
     
+    public JuegoController juegoController = new JuegoController();
     private String animal;
     private String desc; 
-    private String b;
-    private JuegoController juegoController; 
+    private String b;    
+    private String ultimo2;
     private final DecisionTree<String> arbol = DecisionTree.loadTree();
     @FXML        
     private Text descripcion;
@@ -70,27 +71,47 @@ public class No_AdivinoController implements Initializable {
      */
   
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) {         
+        System.out.println(obtenerUltimo(juegoController));
+        setLocalUltimo("un perro.");
         campo_booleano.setVisible(false);
         campo_respuesta.setVisible(false);
         advertencia.setText("");
         guardado.setVisible(false);
-    } 
+    }
     
-    public void guardarRespuesta(){      //validar si no ingresa signos o números  
-        animal = respuesta.getText();        
-        String ultimo = "un perro.";
+    public void setLocalUltimo(String ultimo){
+        ultimo2 = ultimo;        
+    }
+    
+    public void setController(JuegoController jc){
+        this.juegoController = jc;
+    }
+    
+    public JuegoController getController(){
+        return juegoController;
+    }
+    
+    public String obtenerUltimo(JuegoController juegoController){
+        JuegoController jc = new JuegoController();
+        setController(jc);                
+        ultimo2 = getController().getUltimo();
+        return ultimo2;
+    }
+        
+    public void guardarRespuesta(){      //validar si no ingresa signos o números          
+        animal = respuesta.getText();
         if(animal.isEmpty()){
             advertencia.setText("Por favor, llena todos los campos!!");            
         }else{
-        animal = animal.strip();
-        if(animal.endsWith("a")){
+        animal = animal.strip();        
+        if(animal.endsWith("a")&& !animal.startsWith("u")){
             animal = "una "+animal;
         }else if(!animal.startsWith("u")){
             animal = "un "+animal;
         }
         campo_respuesta.setVisible(true);           
-        descripcion.setText("¿Cual es la diferencia entre "+animal+" y "+ultimo+"?");
+        descripcion.setText("¿Cual es la diferencia entre "+animal+" y "+ultimo2+"?");
         }                
     }
     
@@ -109,19 +130,18 @@ public class No_AdivinoController implements Initializable {
         b = pregunta1.getText();
         if(desc.isEmpty()|| animal.isEmpty()|| b.isEmpty()){
             advertencia.setText("Por favor, llena todos los campos!!");
-        }else{ 
-            String ultimo = "un perro.";//obtener el ultimo nodo con la funcion getUltimo();
+        }else{                         
             String b2 = b.toLowerCase();
             if(b2.contains("s")){
                 System.out.println(b2);
-                arbol.replace(ultimo, desc);
+                arbol.replace(ultimo2, desc);
                 arbol.add(animal, desc, true);
-                arbol.add(ultimo,desc,false);
+                arbol.add(ultimo2,desc,false);
             }if(b2.contains("n")){
                 System.out.println(b2);
-                arbol.replace(ultimo, desc);
+                arbol.replace(ultimo2, desc);
                 arbol.add(animal, desc, false);
-                arbol.add(ultimo, desc, true);
+                arbol.add(ultimo2, desc, true);
             }
             arbol.saveTree();
             guardado.setVisible(true);            
