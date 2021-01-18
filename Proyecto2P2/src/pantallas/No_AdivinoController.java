@@ -75,12 +75,7 @@ public class No_AdivinoController implements Initializable {
      
     public void guardarRespuesta(){  
         animal = respuesta.getText();        
-        if(isString(animal)){
-            System.out.println("Está mal el texto");
-            advertencia.setText("Por favor ingresa un texto válido");
-        }
-        else if(animal.isEmpty()){
-            System.out.println("está vacío");
+        if(animal.isEmpty()){            
             advertencia.setText("Por favor ingresa un texto válido");
         }else{
             animal = animal.strip();   
