@@ -24,6 +24,7 @@ public class AdivinoController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

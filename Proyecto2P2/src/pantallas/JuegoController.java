@@ -15,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tda.DecisionTree;
@@ -44,18 +43,6 @@ public class JuegoController implements Initializable {
         mostrarPreguntas();                 
     } 
 
-    public String getUltimo() {
-        return ultimo;
-    }   
-
-    public void setUltimo(String ultimo) {
-        this.ultimo = ultimo;
-    }
-    
-    public JuegoController(){
-        this.ultimo = getUltimo();
-    }
-    
     public void mostrarPreguntas(){
         pregunta.setText(arbol.getRoot());
         pregunta.setVisible(true);        
@@ -63,7 +50,7 @@ public class JuegoController implements Initializable {
 
     public void positivo(ActionEvent event) throws IOException{         
         DecisionTree.Node<String> nodo = positivo(arbol);        
-        String texto =  pregunta.getText().toString();        
+        String texto =  pregunta.getText();        
         if(texto.contains("¡")){
             try{                
                 Parent root = FXMLLoader.load(getClass().getResource("/ventanas/Adivino.fxml"));                    
@@ -77,8 +64,7 @@ public class JuegoController implements Initializable {
             }
         }
         if(nodo.getYes()==null || nodo.getNo()==null){
-            String a = nodo.getData();                                    
-            setUltimo(a);
+            ultimo=nodo.getData();                    
             pregunta.setText("¡Creo que piensas en "+ nodo.getData()+"!"+" ¿Adiviné?");             
         }else{
             pregunta.setText(nodo.getData());
@@ -93,7 +79,7 @@ public class JuegoController implements Initializable {
     
     public void negativo(ActionEvent event){
         DecisionTree.Node<String> nodo = negativo(arbol);        
-        String texto =  pregunta.getText().toString();        
+        String texto =  pregunta.getText();    
         if(texto.contains("¡")){
             try{
                 Parent root = FXMLLoader.load(getClass().getResource("/ventanas/No_Adivino.fxml"));
@@ -106,9 +92,8 @@ public class JuegoController implements Initializable {
                 System.err.println(e);
             }
         }
-        if(nodo.getYes()==null || nodo.getNo()==null){
-            String a = nodo.getData();                        
-            setUltimo(a);  
+        if(nodo.getYes()==null || nodo.getNo()==null){            
+            ultimo=nodo.getData();                        
             pregunta.setText("¡Creo que piensas en "+ nodo.getData()+"!"+" ¿Adiviné?");               
         }else{
             pregunta.setText(nodo.getData());

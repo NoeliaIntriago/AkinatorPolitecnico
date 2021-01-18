@@ -9,11 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,7 +21,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import tda.DecisionTree;
-import static tda.DecisionTree.loadTree;
 
 /**
  * FXML Controller class
@@ -77,23 +73,28 @@ public class No_AdivinoController implements Initializable {
         guardado.setVisible(false);
     }
      
-    public void guardarRespuesta(){      //validar si no ingresa signos o números          
-        animal = respuesta.getText();
-        if(animal.isEmpty()){
-            advertencia.setText("Por favor, llena todos los campos!!");            
+    public void guardarRespuesta(){  
+        animal = respuesta.getText();        
+        if(isString(animal)){
+            System.out.println("Está mal el texto");
+            advertencia.setText("Por favor ingresa un texto válido");
+        }
+        else if(animal.isEmpty()){
+            System.out.println("está vacío");
+            advertencia.setText("Por favor ingresa un texto válido");
         }else{
-        animal = animal.strip();        
-        if(animal.endsWith("a")&& !animal.startsWith("u")){
+            animal = animal.strip();   
+            if(animal.endsWith("a")&& !animal.startsWith("u")){
             animal = "una "+animal;
         }else if(!animal.startsWith("u")){
             animal = "un "+animal;
         }
         campo_respuesta.setVisible(true);           
-        descripcion.setText("¿Cual es la diferencia entre "+animal+" y "+ultimo2+"?");
-        }                
+        descripcion.setText("¿Cual es la diferencia entre "+animal+" y "+ultimo2+"?");            
+        }              
     }
     
-    public void guardarPregunta(){    //validar si no ingresa signos o números         
+    public void guardarPregunta(){
         desc = pregunta.getText();
         if(desc.isEmpty()|| animal.isEmpty()){
             advertencia.setText("Por favor, llena todos los campos!!");
@@ -104,19 +105,17 @@ public class No_AdivinoController implements Initializable {
         }           
     }
     
-    public void guardarBoolean(){     //validar si no ingresa signos o números   //validar si ingresa si o no        
+    public void guardarBoolean(){
         b = pregunta1.getText();
         if(desc.isEmpty()|| animal.isEmpty()|| b.isEmpty()){
             advertencia.setText("Por favor, llena todos los campos!!");
         }else{                         
             String b2 = b.toLowerCase();
-            if(b2.contains("s")){
-                System.out.println(b2);
+            if(b2.contains("s")){                
                 arbol.replace(ultimo2, desc);
                 arbol.add(animal, desc, true);
                 arbol.add(ultimo2,desc,false);
-            }if(b2.contains("n")){
-                System.out.println(b2);
+            }if(b2.contains("n")){                
                 arbol.replace(ultimo2, desc);
                 arbol.add(animal, desc, false);
                 arbol.add(ultimo2, desc, true);
@@ -124,6 +123,10 @@ public class No_AdivinoController implements Initializable {
             arbol.saveTree();
             guardado.setVisible(true);            
         }  
+    }
+    
+    public boolean isString(Object str){        
+        return str instanceof String;
     }
     
     public void borrarAdvertencia(){
