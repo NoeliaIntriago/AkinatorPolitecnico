@@ -30,7 +30,7 @@ public class JuegoController implements Initializable {
     
     private final DecisionTree<String> arbol = loadTree();
     public No_AdivinoController naController;
-    private String ultimo;    
+    public static String ultimo;    
     
     @FXML
     private Text pregunta;     

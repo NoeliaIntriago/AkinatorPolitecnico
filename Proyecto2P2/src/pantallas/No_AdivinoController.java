@@ -31,13 +31,12 @@ import static tda.DecisionTree.loadTree;
  *
  * @author pc-4k
  */
-public class No_AdivinoController implements Initializable {     
+public class No_AdivinoController implements Initializable {         
     
-    public JuegoController juegoController = new JuegoController();
     private String animal;
     private String desc; 
     private String b;    
-    private String ultimo2;
+    private final String ultimo2 = JuegoController.ultimo;
     private final DecisionTree<String> arbol = DecisionTree.loadTree();
     @FXML        
     private Text descripcion;
@@ -72,33 +71,12 @@ public class No_AdivinoController implements Initializable {
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {         
-        System.out.println(obtenerUltimo(juegoController));
-        setLocalUltimo("un perro.");
         campo_booleano.setVisible(false);
         campo_respuesta.setVisible(false);
         advertencia.setText("");
         guardado.setVisible(false);
     }
-    
-    public void setLocalUltimo(String ultimo){
-        ultimo2 = ultimo;        
-    }
-    
-    public void setController(JuegoController jc){
-        this.juegoController = jc;
-    }
-    
-    public JuegoController getController(){
-        return juegoController;
-    }
-    
-    public String obtenerUltimo(JuegoController juegoController){
-        JuegoController jc = new JuegoController();
-        setController(jc);                
-        ultimo2 = getController().getUltimo();
-        return ultimo2;
-    }
-        
+     
     public void guardarRespuesta(){      //validar si no ingresa signos o números          
         animal = respuesta.getText();
         if(animal.isEmpty()){
