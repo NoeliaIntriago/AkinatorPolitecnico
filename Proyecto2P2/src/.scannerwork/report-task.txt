@@ -1,0 +1,6 @@
+projectKey=GrupoProyecto9EDP2:AkinatorPolitecnico
+serverUrl=http://200.9.176.59:9000
+serverVersion=7.7.0.23042
+dashboardUrl=http://200.9.176.59:9000/dashboard?id=GrupoProyecto9EDP2%3AAkinatorPolitecnico
+ceTaskId=AXcYJ_zG2njepCnyV5Fs
+ceTaskUrl=http://200.9.176.59:9000/api/ce/task?id=AXcYJ_zG2njepCnyV5Fs
