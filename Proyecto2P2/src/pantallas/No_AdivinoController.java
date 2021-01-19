@@ -7,6 +7,8 @@ package pantallas;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -30,8 +32,7 @@ import tda.DecisionTree;
 public class No_AdivinoController implements Initializable {         
     
     private String animal;
-    private String desc; 
-    private String b;    
+    private String desc;   
     private final String ultimo2 = JuegoController.getUltimo();
     private final DecisionTree<String> arbol = DecisionTree.loadTree();
     @FXML        
@@ -101,7 +102,7 @@ public class No_AdivinoController implements Initializable {
     }
     
     public void guardarBoolean(){
-        b = pregunta1.getText();
+        String b = pregunta1.getText();
         if(desc.isEmpty()|| animal.isEmpty()|| b.isEmpty()){
             advertencia.setText("Por favor, llena todos los campos!!");
         }else{                         
@@ -136,7 +137,7 @@ public class No_AdivinoController implements Initializable {
             appStage.setScene(scene);            
             appStage.close();
         }catch(IOException e){
-            System.err.println(e);
+            Logger.getLogger(No_AdivinoController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
     
@@ -149,7 +150,7 @@ public class No_AdivinoController implements Initializable {
             appStage.toFront();
             appStage.show();
         }catch(IOException e){
-            System.err.println(e);
+            Logger.getLogger(No_AdivinoController.class.getName()).log(Level.SEVERE, null, e);
         }
     }  
 }
