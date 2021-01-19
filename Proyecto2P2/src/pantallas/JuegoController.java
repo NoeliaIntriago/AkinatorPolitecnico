@@ -31,7 +31,7 @@ public class JuegoController implements Initializable {
     
     private static final DecisionTree<String> arbol = loadTree();
     private No_AdivinoController naController;
-    public static String ultimo;    
+    private static String ultimo;    
     
     @FXML
     private Text pregunta;     
@@ -45,6 +45,10 @@ public class JuegoController implements Initializable {
         mostrarPreguntas();                 
     } 
 
+    public static String getUltimo() {
+        return ultimo;
+    }
+    
     public void mostrarPreguntas(){
         pregunta.setText(arbol.getRoot());
         pregunta.setVisible(true);        
@@ -66,7 +70,7 @@ public class JuegoController implements Initializable {
             }
         }
         if(nodo.getYes()==null || nodo.getNo()==null){
-            ultimo=nodo.getData();                    
+            ultimo = nodo.getData();                    
             pregunta.setText("¡Creo que piensas en "+ nodo.getData()+"!"+" ¿Adiviné?");             
         }else{
             pregunta.setText(nodo.getData());
@@ -95,14 +99,14 @@ public class JuegoController implements Initializable {
             }
         }
         if(nodo.getYes()==null || nodo.getNo()==null){            
-            ultimo=nodo.getData();                        
+            ultimo = nodo.getData();                        
             pregunta.setText("¡Creo que piensas en "+ nodo.getData()+"!"+" ¿Adiviné?");               
         }else{
             pregunta.setText(nodo.getData());
         }        
     } 
     
-    public DecisionTree.Node<String> negativo(DecisionTree<String> a){
+    public static DecisionTree.Node<String> negativo(DecisionTree<String> a){
         DecisionTree.Node<String> nodo = a.root;
         if(nodo.getNo()!=null) a.root = nodo.getNo();
         return a.root;

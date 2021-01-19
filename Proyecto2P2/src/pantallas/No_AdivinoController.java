@@ -32,7 +32,7 @@ public class No_AdivinoController implements Initializable {
     private String animal;
     private String desc; 
     private String b;    
-    private final String ultimo2 = JuegoController.ultimo;
+    private final String ultimo2 = JuegoController.getUltimo();
     private final DecisionTree<String> arbol = DecisionTree.loadTree();
     @FXML        
     private Text descripcion;
