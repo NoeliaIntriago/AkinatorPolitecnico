@@ -30,7 +30,6 @@ import static tda.DecisionTree.loadTree;
 public class JuegoController implements Initializable {
     
     private static final DecisionTree<String> arbol = loadTree();
-    private No_AdivinoController naController;
     private static String ultimo;    
     
     @FXML
