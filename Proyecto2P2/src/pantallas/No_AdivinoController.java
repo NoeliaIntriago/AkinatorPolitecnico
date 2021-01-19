@@ -43,9 +43,9 @@ public class No_AdivinoController implements Initializable {
     @FXML
     private Pane guardado;    
     @FXML
-    private Pane campo_booleano;
+    private Pane campoBooleano;
     @FXML
-    private Pane campo_respuesta;
+    private Pane campoRespuesta;
     @FXML
     private TextField respuesta;
     @FXML
@@ -67,8 +67,8 @@ public class No_AdivinoController implements Initializable {
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {         
-        campo_booleano.setVisible(false);
-        campo_respuesta.setVisible(false);
+        campoBooleano.setVisible(false);
+        campoRespuesta.setVisible(false);
         advertencia.setText("");
         guardado.setVisible(false);
     }
@@ -84,7 +84,7 @@ public class No_AdivinoController implements Initializable {
         }else if(!animal.startsWith("u")){
             animal = "un "+animal;
         }
-        campo_respuesta.setVisible(true);           
+        campoRespuesta.setVisible(true);           
         descripcion.setText("¿Cual es la diferencia entre "+animal+" y "+ultimo2+"?");            
         }              
     }
@@ -94,7 +94,7 @@ public class No_AdivinoController implements Initializable {
         if(desc.isEmpty()|| animal.isEmpty()){
             advertencia.setText("Por favor, llena todos los campos!!");
         }else{            
-            campo_booleano.setVisible(true);
+            campoBooleano.setVisible(true);
             desc+= "?";            
             descripcion2.setText("Para "+animal +" la respuesta a la pregunta: "+desc+" es Sí o No?");
         }           
@@ -110,7 +110,7 @@ public class No_AdivinoController implements Initializable {
                 arbol.replace(ultimo2, desc);
                 arbol.add(animal, desc, true);
                 arbol.add(ultimo2,desc,false);
-            }if(b2.contains("n")){                
+            }else if(b2.contains("n")){                
                 arbol.replace(ultimo2, desc);
                 arbol.add(animal, desc, false);
                 arbol.add(ultimo2, desc, true);

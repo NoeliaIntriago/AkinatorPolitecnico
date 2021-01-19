@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
@@ -10,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="699.0" prefWidth="1257.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pantallas.No_AdivinoController">
+<AnchorPane id="AnchorPane" prefHeight="699.0" prefWidth="1257.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pantallas.No_AdivinoController">
    <children>
       <ImageView fitHeight="705.0" fitWidth="1257.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -73,7 +79,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="campo_booleano" layoutX="416.0" layoutY="288.0" prefHeight="235.0" prefWidth="370.0">
+      <Pane fx:id="campoBooleano" layoutX="416.0" layoutY="288.0" prefHeight="235.0" prefWidth="370.0">
          <children>
             <Text fx:id="descripcion2" fill="WHITE" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="texto" wrappingWidth="243.148193359375">
                <font>
@@ -95,7 +101,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="campo_respuesta" layoutX="37.0" layoutY="421.0" prefHeight="174.0" prefWidth="322.0">
+      <Pane fx:id="campoRespuesta" layoutX="37.0" layoutY="421.0" prefHeight="174.0" prefWidth="322.0">
          <children>
             <TextField fx:id="pregunta" layoutX="6.0" layoutY="77.0" onMouseEntered="#borrarAdvertencia" prefHeight="38.0" prefWidth="267.0">
                <font>

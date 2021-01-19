@@ -8,6 +8,8 @@ package pantallas;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,8 +29,8 @@ import static tda.DecisionTree.loadTree;
  */
 public class JuegoController implements Initializable {
     
-    private final DecisionTree<String> arbol = loadTree();
-    public No_AdivinoController naController;
+    private static final DecisionTree<String> arbol = loadTree();
+    private No_AdivinoController naController;
     public static String ultimo;    
     
     @FXML
@@ -71,7 +73,7 @@ public class JuegoController implements Initializable {
         }       
     }
     
-    public DecisionTree.Node<String> positivo(DecisionTree<String> a){ 
+    public static DecisionTree.Node<String> positivo(DecisionTree<String> a){ 
         DecisionTree.Node<String> nodo = a.root;
         if(nodo.getYes()!=null) a.root=nodo.getYes();        
         return a.root;
@@ -115,7 +117,7 @@ public class JuegoController implements Initializable {
             appStage.toFront();
             appStage.show();
         }catch(IOException e){
-            System.err.println(e);
+            Logger.getLogger(JuegoController.class.getName()).log(Level.SEVERE, null, e);
         }
     } 
     
@@ -128,7 +130,7 @@ public class JuegoController implements Initializable {
             appStage.toFront();
             appStage.show();
         }catch(IOException e){
-            System.err.println(e);
+            Logger.getLogger(JuegoController.class.getName()).log(Level.SEVERE, null, e);        
         }
     } 
 }
